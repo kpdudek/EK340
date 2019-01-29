@@ -1,3 +1,0 @@
-use
-
-cc -o out file.c
