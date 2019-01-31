@@ -2,10 +2,12 @@
 #include <math.h>
 
 int main(){
-	printf("Enter two letters separated by a space: ")
-	scanf(
+	char let1,let2;
+	printf("Enter two letters separated by a space: ");
+	scanf("%c %c",&let1,&let2);
+	printf("You entered: %c and %c\n",let1,let2);
 
-	return 0
+	return 0;
 }
 
 
