@@ -1,7 +1,11 @@
 #include <stdio.h>
 #include <math.h>
 
-
+/*
+This function promts the user for a letter and then a number
+The user is promped infinitley to practice with scanf and the
+buffer retaining the newline character
+*/
 
 int read_num() {
 	int num;
@@ -21,11 +25,6 @@ char read_char() {
 	return let1;
 }
 
-int clear_buff() {
-	int c;
-	while ((c = getchar()) != '\n' && c != EOF) { };
-	return 0;
-}
 
 
 void main() {
