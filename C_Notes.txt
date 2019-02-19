@@ -1,7 +1,7 @@
 Notes About C:
 
 Compiler For Linux:
-cc -o out file.c
+gcc -o out file.c -lm
 
 
 
