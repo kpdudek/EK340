@@ -28,9 +28,10 @@ int rand_num(int max)
 }
 
 
-void print_array(int array[len])
+void print_array(int array[])
 {
-	for(int i=0;i<N;i++)
+	size_t len = sizeof(array);
+	for(int i=0;i<len;i++)
 	{
 		printf("%-3d",array[i]);
 	}
@@ -38,10 +39,10 @@ void print_array(int array[len])
 }
 
 
-void print_sums(int array[len])
+void print_sums(int array[])
 {
 	int sum = 0;
-	
+	size_t len = sizeof(array);
 	for(int i=0;i<len;i++)
 	{
 		sum += array[i];
@@ -62,15 +63,16 @@ int main()
 	int len,max_val;
 	printf("How long is the array? ");
 	scanf("%d",&len);
-	fflush();
+	fflush(stdin);
 
 	printf("Max value for random number? ");
 	scanf("%d",&max_val);
-	fflush();
+	fflush(stdin);
+	
 	
 	for(int i=0;i<len;i++)
 	{
-		nums[i] = rand_num(max_val);
+		nums[i] = rand_num(max);
 	}
 
 	printf("The random numbers are: ");
