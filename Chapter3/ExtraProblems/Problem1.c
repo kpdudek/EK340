@@ -58,12 +58,12 @@ void print_sums(int array[])
 int main()
 {
 	srand(time(NULL));
-	int nums[10];
 	
 	int len,max_val;
 	printf("How long is the array? ");
 	scanf("%d",&len);
 	fflush(stdin);
+	int nums[len];
 
 	printf("Max value for random number? ");
 	scanf("%d",&max_val);
@@ -72,7 +72,7 @@ int main()
 	
 	for(int i=0;i<len;i++)
 	{
-		nums[i] = rand_num(max);
+		nums[i] = rand_num(max_val);
 	}
 
 	printf("The random numbers are: ");
