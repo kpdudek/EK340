@@ -2,16 +2,21 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define MX  20
+#define MX  20 // Max random value
 
+// Structure definition for linked list
 typedef struct linked_list
 {
     int data;
     struct linked_list *next;
 }   element;
 
+// Pointer to an element in the linked list
 typedef element * elementptr;
 
+/*
+---> Function Prototypes
+*/
 void init(elementptr *, elementptr *);
 void addone(elementptr *);
 void trav_and_print(elementptr);
@@ -20,15 +25,21 @@ int num_elems(elementptr);
 void test_it(elementptr, elementptr);
 elementptr get_currentptr(elementptr,int);
 
+/*
+---> Main Loop
+*/
 int main()
 {
+    // Pointers to linked list elements
     elementptr first = NULL,
                last = NULL,
                current = NULL;
+    // int for the num_elems function
     int num_elem;
 
     srand(time(NULL));
     init(&first,&last);
+
     trav_and_print(first);
     addone(&last);
     trav_and_print(first);
@@ -39,9 +50,13 @@ int main()
 
     test_it(first,last);
     current = get_currentptr(first,num_elem);
+    printf("%p\n",current);
     return 0;
 }
 
+/*
+---> Program functions
+*/
 // Set up linked list with one element
 void init(elementptr *f, elementptr *l)
 {
