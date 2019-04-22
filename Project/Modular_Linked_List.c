@@ -36,27 +36,68 @@ int main()
                current = NULL;
     // int for the num_elems function
     int num_elem;
+    char inputchar;
 
     srand(time(NULL));
-    init(&first,&last);
 
-    trav_and_print(first);
-    addone(&last);
-    trav_and_print(first);
+    printf("Welcome Human\n");
+    //delay(1);
+    printf("The options are:\nI - Initialize linked list\n");
+    printf("T - Traverse and print\nA - Append an element\n");
+    printf("E - Exit\n");
+    printf("\n$ ");
 
-    // Beginning of additions to starter code
-    num_elem = num_elems(first);
-    printf("There are %d elements\n",num_elem);
+    int exit = 0;
+    while(1)//scanf("%c", &inputchar) == 1)
+    {
+        scanf("%c", &inputchar);
+        printf("You entered a %c.\n\n", inputchar);
+        switch(inputchar)
+        {
+          case 'I':
+            init(&first,&last);
+            break;
 
-    test_it(first,last);
-    current = get_currentptr(first,num_elem);
-    printf("%p\n",current);
+          case 'T':
+            trav_and_print(first);
+            break;
+
+          case 'A':
+            addone(&last);
+            break;
+
+          case 'E':
+            exit = 1;
+            break;
+        }
+
+        if(exit){break;}
+
+        //printf("$ ");
+        fflush(stdin);
+    }
+    printf("Good bye\n\n");
+
+    // init(&first,&last);
+    //
+    // trav_and_print(first);
+    // addone(&last);
+    // trav_and_print(first);
+    //
+    // // Beginning of additions to starter code
+    // num_elem = num_elems(first);
+    // printf("There are %d elements\n",num_elem);
+    //
+    // test_it(first,last);
+    // current = get_currentptr(first,num_elem);
+    // printf("%d\n",current->data);
     return 0;
 }
 
 /*
 ---> Program functions
 */
+
 // Set up linked list with one element
 void init(elementptr *f, elementptr *l)
 {
@@ -119,13 +160,14 @@ void test_it(elementptr f,elementptr l)
 
 elementptr get_currentptr(elementptr f, int length)
 {
-  int rand_val = rand()%length+1,
-      i;
+  int rand_val = rand()%length,
+      i=0;
   elementptr current = f;
 
   while (i < rand_val)
   {
     current = current -> next;
+    i++;
   }
   return current;
 }
