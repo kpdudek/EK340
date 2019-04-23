@@ -34,24 +34,32 @@ int main()
     elementptr first = NULL,
                last = NULL,
                current = NULL;
-    // int for the num_elems function
-    int num_elem;
+
+    // Variable declarations
+    int num_elem,
+        exit = 0;
     char inputchar;
 
+    // Set the random number seed
     srand(time(NULL));
 
     printf("Welcome Human\n");
-    //delay(1);
-    printf("The options are:\nI - Initialize linked list\n");
-    printf("T - Traverse and print\nA - Append an element\n");
+    printf("The options are:\n");
+    printf("I - Initialize linked list\n");
+    printf("T - Traverse and print\n");
+    printf("A - Append an element\n");
     printf("E - Exit\n");
+
+    // Print the command line indicator
     printf("\n$ ");
 
-    int exit = 0;
-    while(1)//scanf("%c", &inputchar) == 1)
+    // Running loop
+    while(1)
     {
+        // Read the user entered character
         scanf("%c", &inputchar);
-        printf("You entered a %c.\n\n", inputchar);
+
+        // Switch statement for different menu options
         switch(inputchar)
         {
           case 'I':
@@ -69,12 +77,19 @@ int main()
           case 'E':
             exit = 1;
             break;
+
+          default:
+            printf("Not a valid option. Please re-enter command.\n");
         }
 
+        // If exit flag is true, exit the running loop
         if(exit){break;}
 
-        //printf("$ ");
-        fflush(stdin);
+        // Flush stdin
+        while ( getchar() != '\n' && getchar()!=EOF);
+
+        // Print the command line indicator
+        printf("$ ");
     }
     printf("Good bye\n\n");
 
@@ -105,6 +120,7 @@ void init(elementptr *f, elementptr *l)
     *l = *f;
     (*l) -> data = rand()%MX+1;
     (*l) -> next = NULL;
+    printf("Linked list initialized!\n");
 }
 
 // Add element to the end of the linked list
