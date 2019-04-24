@@ -36,15 +36,16 @@ int main()
                current = NULL;
 
     // Variable declarations
-    int num_elem,
-        exit = 0;
+    int num_elem = 0,
+        exit = 0,
+        isLinkedList = 0;
     char inputchar;
 
     // Set the random number seed
     srand(time(NULL));
 
     // Print menu options
-    printf("-- Welcome Human --\n");
+    printf("\n-- Welcome Human --\n");
     printf("The options are:\n");
     printf("I - Initialize linked list\n");
     printf("P - Traverse and print\n");
@@ -68,31 +69,45 @@ int main()
         {
           case 'I':
             init(&first,&last);
+            isLinkedList = 1;
             break;
 
           case 'P':
+            if (!isLinkedList){printf("Initialize the linekd list!\n");break;}
             trav_and_print(first);
             break;
 
           case 'A':
+            if (!isLinkedList){printf("Initialize the linekd list!\n");break;}
             addone(&last);
             break;
 
           case 'E':
+            if (!isLinkedList){printf("Initialize the linekd list!\n");break;}
             exit = 1;
             break;
 
           case 'T':
+            if (!isLinkedList){printf("Initialize the linekd list!\n");break;}
             test_it(first,last);
             break;
 
           case 'C':
+            if (!isLinkedList){printf("Initialize the linekd list!\n");break;}
             current = get_currentptr(first,num_elems(first));
             break;
 
           case 'N':
+            if (!isLinkedList){printf("Initialize the linekd list!\n");break;}
             num_elem = num_elems(first);
-            printf("There are %d elements\n",num_elem);
+            if(num_elem==1)
+            {
+              printf("There is 1 element\n");
+            }
+            else
+            {
+              printf("There are %d elements\n",num_elem);
+            }
             break;
 
           default: // Handle any characters not offered in menu
@@ -108,7 +123,7 @@ int main()
         // Print the command line indicator
         printf("$ ");
     }
-    printf("\n\nGood bye\n\n");
+    printf("\n\nGood bye :(\n\n");
     return 0;
 }
 
@@ -175,6 +190,7 @@ int num_elems(elementptr f)
 void test_it(elementptr f,elementptr l)
 {
   trav_and_print(f);
+  printf("\n");
   printf("The first data value is %d\n",f->data);
   printf("The last data value is %d\n",l->data);
 }
