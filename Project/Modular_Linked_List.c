@@ -46,8 +46,11 @@ int main()
     printf("Welcome Human\n");
     printf("The options are:\n");
     printf("I - Initialize linked list\n");
-    printf("T - Traverse and print\n");
+    printf("P - Traverse and print\n");
     printf("A - Append an element\n");
+    printf("T - Test the linked list\n");
+    printf("C - Randomize current pointer\n");
+    printf("N - Count and print number of elements\n");
     printf("E - Exit\n");
 
     // Print the command line indicator
@@ -66,7 +69,7 @@ int main()
             init(&first,&last);
             break;
 
-          case 'T':
+          case 'P':
             trav_and_print(first);
             break;
 
@@ -76,6 +79,19 @@ int main()
 
           case 'E':
             exit = 1;
+            break;
+
+          case 'T':
+            test_it(first,last);
+            break;
+
+          case 'C':
+            current = get_currentptr(first,num_elems(first));
+            break;
+            
+          case 'N':
+            num_elem = num_elems(first);
+            printf("There are %d elements\n",num_elem);
             break;
 
           default:
