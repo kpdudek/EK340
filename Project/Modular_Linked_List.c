@@ -43,7 +43,8 @@ int main()
     // Set the random number seed
     srand(time(NULL));
 
-    printf("Welcome Human\n");
+    // Print menu options
+    printf("-- Welcome Human --\n");
     printf("The options are:\n");
     printf("I - Initialize linked list\n");
     printf("P - Traverse and print\n");
@@ -56,13 +57,13 @@ int main()
     // Print the command line indicator
     printf("\n$ ");
 
-    // Running loop
+    // Running loop - runs until program is killed or 'E' is entered
     while(1)
     {
         // Read the user entered character
         scanf("%c", &inputchar);
 
-        // Switch statement for different menu options
+        // Switch statement for different menu options as specified in print statements
         switch(inputchar)
         {
           case 'I':
@@ -88,13 +89,13 @@ int main()
           case 'C':
             current = get_currentptr(first,num_elems(first));
             break;
-            
+
           case 'N':
             num_elem = num_elems(first);
             printf("There are %d elements\n",num_elem);
             break;
 
-          default:
+          default: // Handle any characters not offered in menu
             printf("Not a valid option. Please re-enter command.\n");
         }
 
@@ -107,21 +108,7 @@ int main()
         // Print the command line indicator
         printf("$ ");
     }
-    printf("Good bye\n\n");
-
-    // init(&first,&last);
-    //
-    // trav_and_print(first);
-    // addone(&last);
-    // trav_and_print(first);
-    //
-    // // Beginning of additions to starter code
-    // num_elem = num_elems(first);
-    // printf("There are %d elements\n",num_elem);
-    //
-    // test_it(first,last);
-    // current = get_currentptr(first,num_elem);
-    // printf("%d\n",current->data);
+    printf("\n\nGood bye\n\n");
     return 0;
 }
 
@@ -183,6 +170,8 @@ int num_elems(elementptr f)
         return num;
 }
 
+// Call traverse and print. Then print the data value in the first and last
+// Element to check the integrity of the linked list
 void test_it(elementptr f,elementptr l)
 {
   trav_and_print(f);
