@@ -24,6 +24,7 @@ void trav_and_print(elementptr);
 int num_elems(elementptr);
 void test_it(elementptr, elementptr);
 elementptr get_currentptr(elementptr,int);
+void append_to_current(elementptr *,elementptr *,elementptr *);
 
 /*
 ---> Main Loop
@@ -53,6 +54,7 @@ int main()
     printf("T - Test the linked list\n");
     printf("C - Randomize current pointer\n");
     printf("N - Count and print number of elements\n");
+    printf("L - Append to current pointer\n");
     printf("E - Exit\n");
 
     // Print the command line indicator
@@ -110,6 +112,11 @@ int main()
             }
             break;
 
+          case 'L':
+            if (!isLinkedList){printf("Initialize the linekd list!\n");break;}
+            append_to_current(&first,&current,&last);
+            break;
+
           default: // Handle any characters not offered in menu
             printf("Not a valid option. Please re-enter command.\n");
         }
@@ -118,7 +125,7 @@ int main()
         if(exit){break;}
 
         // Flush stdin
-        while ( getchar() != '\n' && getchar()!=EOF);
+        while (getchar() != '\n' && getchar()!= EOF);
 
         // Print the command line indicator
         printf("$ ");
@@ -195,6 +202,8 @@ void test_it(elementptr f,elementptr l)
   printf("The last data value is %d\n",l->data);
 }
 
+// Generates a random number in the range of the length of the linked list and
+// and then assigns a pointer to that index in the linked list
 elementptr get_currentptr(elementptr f, int length)
 {
   int rand_val = rand()%length,
@@ -207,4 +216,14 @@ elementptr get_currentptr(elementptr f, int length)
     i++;
   }
   return current;
+}
+
+// This function adds an element to the linked list after the current Pointer
+void append_to_current(elementptr *f, elementptr *c, elementptr *l)
+{
+  elementptr temp;
+  temp = (elementptr)malloc(sizeof(element));
+  temp->data = rand()%MX+1;
+  temp->next = (*c)->next;
+  (*c)->next = temp;
 }
