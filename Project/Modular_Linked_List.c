@@ -28,14 +28,15 @@ typedef element * elementptr;
 /*
 ---> Function Prototypes
 */
-void init(elementptr *, elementptr *);
-void addone(elementptr *);
-void trav_and_print(elementptr);
+void init(elementptr *, elementptr *); // initialize the linked linked_list
+void addone(elementptr *); // Append an element to the end of the list
+void trav_and_print(elementptr); // Traverse and print
 
-int num_elems(elementptr);
-void test_it(elementptr, elementptr);
-elementptr get_currentptr(elementptr,int);
-void append_to_current(elementptr *,elementptr *,elementptr *);
+int num_elems(elementptr); // Count and print the number of elements
+void test_it(elementptr, elementptr); // traverse and print, then print first and last
+elementptr get_currentptr(elementptr,int); // set current pointer to a random element in list
+void append_to_current(elementptr *,elementptr *,elementptr *); // append an element to current pointer
+void print_menu();
 
 /*
 ---> Main Loop
@@ -76,7 +77,7 @@ int main()
     {
         // Read the user entered character
         scanf("%d", &inputint);
-        //printf("You entered %d\n",inputchar); // Debugging the user input
+        printf("You entered %d\n",inputint); // Debugging the user input
 
         // Switch statement for different menu options as specified in print statements
         switch(inputint)
@@ -242,10 +243,32 @@ void append_to_current(elementptr *f, elementptr *c, elementptr *l)
   elementptr temp;
   temp = (elementptr)malloc(sizeof(element));
   temp->data = rand()%MX+1;
+
+  // if ((*c)->next == NULL)
+  // {
+  //   temp -> next = NULL;
+  //   (*l) = temp;
+  //   (*c) -> next = temp;
+  // }
+
   temp->next = (*c)->next;
   (*c)->next = temp;
-  if ((*l) == (*c))
+//}
+  if ((*c)->next == NULL)
   {
-    *l = *c;
+    *l = temp;
   }
+}
+
+void print_menu()
+{
+  printf("The options are:\n");
+  printf("1 - Initialize linked list\n");
+  printf("2 - Traverse and print\n");
+  printf("3 - Append an element to end of list\n");
+  printf("4 - Test the linked list\n");
+  printf("5 - Randomize current pointer\n");
+  printf("6 - Count and print number of elements\n");
+  printf("7 - Append to current pointer\n");
+  printf("0 - Exit\n");
 }
