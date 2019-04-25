@@ -3,6 +3,13 @@
 #include <time.h>
 
 #define MX  20 // Max random value
+#define ANSI_COLOR_RED     "\x1b[31m"
+#define ANSI_COLOR_GREEN   "\x1b[32m"
+#define ANSI_COLOR_YELLOW  "\x1b[33m"
+#define ANSI_COLOR_BLUE    "\x1b[34m"
+#define ANSI_COLOR_MAGENTA "\x1b[35m"
+#define ANSI_COLOR_CYAN    "\x1b[36m"
+#define ANSI_COLOR_RESET   "\x1b[0m"
 
 // Structure definition for linked list
 typedef struct linked_list
@@ -75,32 +82,31 @@ int main()
             break;
 
           case 'P':
-            if (!isLinkedList){printf("Initialize the linekd list!\n");break;}
+            if (!isLinkedList){printf(ANSI_COLOR_RED"Initialize the linked list!\n");break;}
             trav_and_print(first);
             break;
 
           case 'A':
-            if (!isLinkedList){printf("Initialize the linekd list!\n");break;}
+            if (!isLinkedList){printf(ANSI_COLOR_RED"Initialize the linked list!\n");break;}
             addone(&last);
             break;
 
           case 'E':
-            if (!isLinkedList){printf("Initialize the linekd list!\n");break;}
             exit = 1;
             break;
 
           case 'T':
-            if (!isLinkedList){printf("Initialize the linekd list!\n");break;}
+            if (!isLinkedList){printf(ANSI_COLOR_RED"Initialize the linked list!\n");break;}
             test_it(first,last);
             break;
 
           case 'C':
-            if (!isLinkedList){printf("Initialize the linekd list!\n");break;}
+            if (!isLinkedList){printf(ANSI_COLOR_RED"Initialize the linked list!\n");break;}
             current = get_currentptr(first,num_elems(first));
             break;
 
           case 'N':
-            if (!isLinkedList){printf("Initialize the linekd list!\n");break;}
+            if (!isLinkedList){printf(ANSI_COLOR_RED"Initialize the linked list!\n");break;}
             num_elem = num_elems(first);
             if(num_elem==1)
             {
@@ -113,12 +119,17 @@ int main()
             break;
 
           case 'L':
-            if (!isLinkedList){printf("Initialize the linekd list!\n");break;}
+            if (!isLinkedList){printf(ANSI_COLOR_RED"Initialize the linked list!\n");break;}
+            if (current == NULL)
+            {
+              current = get_currentptr(first,num_elems(first));
+              printf(ANSI_COLOR_CYAN"Current pointer did not exist! One was created for you.\n");
+            }
             append_to_current(&first,&current,&last);
             break;
 
           default: // Handle any characters not offered in menu
-            printf("Not a valid option. Please re-enter command.\n");
+            printf(ANSI_COLOR_RED"Not a valid option. Please re-enter command.\n");
         }
 
         // If exit flag is true, exit the running loop
@@ -128,7 +139,7 @@ int main()
         while (getchar() != '\n' && getchar()!= EOF);
 
         // Print the command line indicator
-        printf("$ ");
+        printf(ANSI_COLOR_RESET "$ ");
     }
     printf("\n\nGood bye :(\n\n");
     return 0;
@@ -226,4 +237,8 @@ void append_to_current(elementptr *f, elementptr *c, elementptr *l)
   temp->data = rand()%MX+1;
   temp->next = (*c)->next;
   (*c)->next = temp;
+  if ((*l) == (*c))
+  {
+    *l = *c;
+  }
 }
