@@ -3,6 +3,10 @@
 #include <time.h>
 
 #define MX  20 // Max random value
+
+// Defining ASCII escape codes for terminal emulator colored ouput
+// Since escape codes are handled by an emulator, this will not effect windows
+// operation
 #define ANSI_COLOR_RED     "\x1b[31m"
 #define ANSI_COLOR_GREEN   "\x1b[32m"
 #define ANSI_COLOR_YELLOW  "\x1b[33m"
@@ -44,25 +48,25 @@ int main()
                current = NULL;
 
     // Variable declarations
-    int num_elem = 0,
+    int inputint,
+        num_elem = 0,
         exit = 0,
         isLinkedList = 0;
-    char inputchar;
 
     // Set the random number seed
     srand(time(NULL));
 
     // Print menu options
-    printf("\n-- Welcome Human --\n");
+    printf(ANSI_COLOR_RESET "\n-- Welcome Human --\n");
     printf("The options are:\n");
-    printf("I - Initialize linked list\n");
-    printf("P - Traverse and print\n");
-    printf("A - Append an element\n");
-    printf("T - Test the linked list\n");
-    printf("C - Randomize current pointer\n");
-    printf("N - Count and print number of elements\n");
-    printf("L - Append to current pointer\n");
-    printf("E - Exit\n");
+    printf("1 - Initialize linked list\n");
+    printf("2 - Traverse and print\n");
+    printf("3 - Append an element to end of list\n");
+    printf("4 - Test the linked list\n");
+    printf("5 - Randomize current pointer\n");
+    printf("6 - Count and print number of elements\n");
+    printf("7 - Append to current pointer\n");
+    printf("0 - Exit\n");
 
     // Print the command line indicator
     printf("\n$ ");
@@ -71,41 +75,38 @@ int main()
     while(1)
     {
         // Read the user entered character
-        scanf("%c", &inputchar);
+        scanf("%d", &inputint);
+        //printf("You entered %d\n",inputchar); // Debugging the user input
 
         // Switch statement for different menu options as specified in print statements
-        switch(inputchar)
+        switch(inputint)
         {
-          case 'I':
+          case 1:
             init(&first,&last);
             isLinkedList = 1;
             break;
 
-          case 'P':
+          case 2:
             if (!isLinkedList){printf(ANSI_COLOR_RED"Initialize the linked list!\n");break;}
             trav_and_print(first);
             break;
 
-          case 'A':
+          case 3:
             if (!isLinkedList){printf(ANSI_COLOR_RED"Initialize the linked list!\n");break;}
             addone(&last);
             break;
 
-          case 'E':
-            exit = 1;
-            break;
-
-          case 'T':
+          case 4:
             if (!isLinkedList){printf(ANSI_COLOR_RED"Initialize the linked list!\n");break;}
             test_it(first,last);
             break;
 
-          case 'C':
+          case 5:
             if (!isLinkedList){printf(ANSI_COLOR_RED"Initialize the linked list!\n");break;}
             current = get_currentptr(first,num_elems(first));
             break;
 
-          case 'N':
+          case 6:
             if (!isLinkedList){printf(ANSI_COLOR_RED"Initialize the linked list!\n");break;}
             num_elem = num_elems(first);
             if(num_elem==1)
@@ -118,7 +119,7 @@ int main()
             }
             break;
 
-          case 'L':
+          case 7:
             if (!isLinkedList){printf(ANSI_COLOR_RED"Initialize the linked list!\n");break;}
             if (current == NULL)
             {
@@ -128,7 +129,13 @@ int main()
             append_to_current(&first,&current,&last);
             break;
 
-          default: // Handle any characters not offered in menu
+          // Exit
+          case 0:
+            exit = 1;
+            break;
+
+          // Handle any characters not offered in menu
+          default:
             printf(ANSI_COLOR_RED"Not a valid option. Please re-enter command.\n");
         }
 
@@ -141,7 +148,7 @@ int main()
         // Print the command line indicator
         printf(ANSI_COLOR_RESET "$ ");
     }
-    printf("\n\nGood bye :(\n\n");
+    printf(ANSI_COLOR_YELLOW "\n\nGood bye :(\n\n" ANSI_COLOR_RESET);
     return 0;
 }
 
