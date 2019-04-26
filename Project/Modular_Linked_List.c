@@ -62,10 +62,10 @@ int main()
     printf("The options are:\n");
     printf("1 - Initialize linked list\n");
     printf("2 - Traverse and print\n");
-    printf("3 - Append an element to end of list\n");
-    printf("4 - Test the linked list\n");
-    printf("5 - Randomize current pointer\n");
-    printf("6 - Count and print number of elements\n");
+    printf("3 - Test the linked list\n");
+    printf("4 - Randomize current pointer\n");
+    printf("5 - Count and print number of elements\n");
+    printf("6 - Append an element to end of list\n");
     printf("7 - Append to current pointer\n");
     printf("0 - Exit\n");
 
@@ -77,16 +77,18 @@ int main()
     {
         // Read the user entered character
         scanf("%d", &inputint);
-        printf("You entered %d\n",inputint); // Debugging the user input
+        //printf("You entered %d\n",inputint); // Debugging the user input
 
         // Switch statement for different menu options as specified in print statements
         switch(inputint)
         {
+          // Initialize the linked list
           case 1:
             init(&first,&last);
             isLinkedList = 1;
             break;
 
+          // Traverse and print the linked list
           case 2:
             if (!isLinkedList){printf(ANSI_COLOR_RED"Initialize the linked list!\n");break;}
             trav_and_print(first);
@@ -94,20 +96,16 @@ int main()
 
           case 3:
             if (!isLinkedList){printf(ANSI_COLOR_RED"Initialize the linked list!\n");break;}
-            addone(&last);
+            test_it(first,last);
             break;
 
           case 4:
             if (!isLinkedList){printf(ANSI_COLOR_RED"Initialize the linked list!\n");break;}
-            test_it(first,last);
+            current = get_currentptr(first,num_elems(first));
+            printf("Current pointer set.\n");
             break;
 
           case 5:
-            if (!isLinkedList){printf(ANSI_COLOR_RED"Initialize the linked list!\n");break;}
-            current = get_currentptr(first,num_elems(first));
-            break;
-
-          case 6:
             if (!isLinkedList){printf(ANSI_COLOR_RED"Initialize the linked list!\n");break;}
             num_elem = num_elems(first);
             if(num_elem==1)
@@ -118,6 +116,12 @@ int main()
             {
               printf("There are %d elements\n",num_elem);
             }
+            break;
+
+          // Append an element to the end of the linked list
+          case 6:
+            if (!isLinkedList){printf(ANSI_COLOR_RED"Initialize the linked list!\n");break;}
+            addone(&last);
             break;
 
           case 7:
@@ -137,7 +141,8 @@ int main()
 
           // Handle any characters not offered in menu
           default:
-            printf(ANSI_COLOR_RED"Not a valid option. Please re-enter command.\n");
+            printf(ANSI_COLOR_RED"Not a valid option. Please re-enter command.\n\n"ANSI_COLOR_RESET);
+            print_menu();
         }
 
         // If exit flag is true, exit the running loop
@@ -244,20 +249,19 @@ void append_to_current(elementptr *f, elementptr *c, elementptr *l)
   temp = (elementptr)malloc(sizeof(element));
   temp->data = rand()%MX+1;
 
+  if ((*c)->next == NULL)
+  {
+    *l = temp;
+  }
   // if ((*c)->next == NULL)
   // {
   //   temp -> next = NULL;
   //   (*l) = temp;
   //   (*c) -> next = temp;
   // }
-
   temp->next = (*c)->next;
   (*c)->next = temp;
 //}
-  if ((*c)->next == NULL)
-  {
-    *l = temp;
-  }
 }
 
 void print_menu()
@@ -265,10 +269,10 @@ void print_menu()
   printf("The options are:\n");
   printf("1 - Initialize linked list\n");
   printf("2 - Traverse and print\n");
-  printf("3 - Append an element to end of list\n");
-  printf("4 - Test the linked list\n");
-  printf("5 - Randomize current pointer\n");
-  printf("6 - Count and print number of elements\n");
+  printf("3 - Test the linked list\n");
+  printf("4 - Randomize current pointer\n");
+  printf("5 - Count and print number of elements\n");
+  printf("6 - Append an element to end of list\n");
   printf("7 - Append to current pointer\n");
   printf("0 - Exit\n");
 }
