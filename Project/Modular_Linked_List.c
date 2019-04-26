@@ -12,17 +12,6 @@
 
 #define MX  20 // Max random value
 
-// Defining ASCII escape codes for terminal emulator colored ouput
-// Since escape codes are handled by an emulator, this will not affect windows
-// operation
-#define ANSI_COLOR_RED     "\x1b[31m"
-#define ANSI_COLOR_GREEN   "\x1b[32m"
-#define ANSI_COLOR_YELLOW  "\x1b[33m"
-#define ANSI_COLOR_BLUE    "\x1b[34m"
-#define ANSI_COLOR_MAGENTA "\x1b[35m"
-#define ANSI_COLOR_CYAN    "\x1b[36m"
-#define ANSI_COLOR_RESET   "\x1b[0m"
-
 // Structure definition for linked list
 typedef struct linked_list
 {
@@ -68,7 +57,7 @@ int main()
     srand(time(NULL));
 
     // Print menu options
-    printf(ANSI_COLOR_RESET "\n-- Welcome Human --\n");
+    printf("\n-- Welcome Human --\n");
     printf("The options are:\n");
     printf("1 - Initialize linked list\n");
     printf("2 - Traverse and print\n");
@@ -140,7 +129,7 @@ int main()
             // Check if there is a current pointer, make one if there isnt
             if (first != NULL && last != NULL && current == NULL)
             {
-              printf(ANSI_COLOR_CYAN"Current pointer did not exist! One was created for you.\n"ANSI_COLOR_RESET);
+              printf("Current pointer did not exist! One was created for you.\n");
               current = get_currentptr(first,num_elems(first));
             }
             append_to_current(&first,&current,&last);
@@ -151,7 +140,7 @@ int main()
             // Check if there is a current pointer, make one if there isnt
             if (first != NULL && last != NULL && current == NULL)
             {
-              printf(ANSI_COLOR_CYAN"Current pointer did not exist! One was created for you.\n"ANSI_COLOR_RESET);
+              printf("Current pointer did not exist! One was created for you.\n");
               current = get_currentptr(first,num_elems(first));
             }
             add_before_current(&first,&current,&last);
@@ -162,7 +151,7 @@ int main()
             // Check if there is a current pointer, make one if there isnt
             if (first != NULL && last != NULL && current == NULL)
             {
-              printf(ANSI_COLOR_CYAN"Current pointer did not exist! One was created for you.\n"ANSI_COLOR_RESET);
+              printf("Current pointer did not exist! One was created for you.\n");
               current = get_currentptr(first,num_elems(first));
             }
             delete_current(&first,&current,&last,num_elems(first));
@@ -180,7 +169,7 @@ int main()
 
           // Handle any cases not offered in menu
           default:
-            printf(ANSI_COLOR_RED"Not a valid option. Please re-enter command.\n\n"ANSI_COLOR_RESET);
+            printf("Not a valid option. Please re-enter command.\n\n");
             print_menu();
         }
 
@@ -191,9 +180,9 @@ int main()
         while (getchar() != '\n' && getchar()!= EOF);
 
         // Print the command line indicator
-        printf(ANSI_COLOR_RESET "$ ");
+        printf("$ ");
     }
-    printf(ANSI_COLOR_YELLOW "\n\nGood bye :(\n\n" ANSI_COLOR_RESET);
+    printf("\n\nGood bye :(\n\n");
     return 0;
 }
 
