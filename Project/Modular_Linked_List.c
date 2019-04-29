@@ -402,8 +402,8 @@ void add_before_current(elementptr *f, elementptr *c, elementptr *l)
       // Make the new elemenets next pointer the current pointers value (the first
       // element in the list)
       temp->next = (*c);
-      return;
-    }
+
+    } else {
 
     // While the running pointer's next pointer is not the current pointer
     while(running->next !=  (*c))
@@ -416,6 +416,7 @@ void add_before_current(elementptr *f, elementptr *c, elementptr *l)
     running->next = temp;
     // Make the new elements next pointer point to the current pointer
     temp->next = (*c);
+  }
   }
 }
 
